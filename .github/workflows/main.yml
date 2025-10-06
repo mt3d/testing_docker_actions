@@ -18,7 +18,7 @@ jobs:
         run: echo "${{ steps.my-action.outputs.message }}"
 
       - name: test the container
-        if: ${{ steps.my-action.outputs.message == "Undefined" }}
+        if: ${{ steps.my-action.outputs.message == Undefined }}
         run: |
           echo: "::error file=entrypoint.sh,line=4,title=Error in container::Unexpected message"
           exit 1
