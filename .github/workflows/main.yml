@@ -1,0 +1,24 @@
+name: Test Workflow
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3.5.3
+
+      - name: run container action
+        id: my-action
+        uses: ./
+        with:
+          user-to-greet: "Muhammad"
+
+      - name: output
+        run: echo "${{ steps.my-action.outputs.message }}"
+
+      - name: test the container
+        if: ${{ steps.my-action.outputs.message == "Undefined" }}
+        run: |
+          echo: "::error file=entrypoint.sh,line=4,title=Error in container::Unexpected message"
+          exit 1
