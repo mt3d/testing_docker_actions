@@ -1,0 +1,15 @@
+name: "Test Action"
+description: "Greets the user"
+inputs:
+  user-to-greet:
+    description: 'who to greet'
+    required: true
+    default: 'Undefined'
+outputs:
+  message:
+    description: 'message with the name of the organization'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.user-to-greet }}
